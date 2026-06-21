@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# React Native
+.metro-health-check*
+.bundle/
+
+# Android
+android/build/
+android/.gradle/
+android/app/build/
+android/local.properties
+android/app/debug.keystore
+android/gradle/
+android/gradlew
+android/gradlew.bat
+*.keystore
+!debug.keystore
+
+# iOS
+ios/Pods/
+ios/build/
+ios/*.xcworkspace/
+ios/*.xcodeproj/project.xcworkspace/
+
+# Coverage
+coverage/
