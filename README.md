@@ -410,4 +410,4 @@ Base URL: `http://localhost:3000`
 3. Recebe e-mail com código de 6 dígitos (válido 10 min)
 4. Digita o código → `POST /auth/verify-code` → recebe `resetToken`
 5. Define nova senha → `POST /auth/reset-password`
-6. Redirecionado para o login com a nova senha
+6. Redirecionado para o login com a nova senha.
