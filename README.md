@@ -544,3 +544,106 @@ permitindo envio por WhatsApp, e-mail, redes sociais ou qualquer app instalado.
 
 Vídeo gravado diretamente do emulador mostrando o fluxo completo: login, navegação pelo Drawer,
 listagem do cardápio, busca em tempo real e acionamento do compartilhamento nativo.
+
+### EA3 — Integração com WebService e CRUD de Produtos
+
+Nesta etapa foi realizada a integração completa entre o aplicativo mobile e o backend REST desenvolvido em NestJS, utilizando PostgreSQL como banco de dados para persistência das informações do cardápio.
+
+#### Passo 1 — Implementação do WebService
+
+Foi desenvolvido um WebService REST utilizando NestJS e TypeORM, responsável pelo gerenciamento dos produtos do cardápio. A API disponibiliza endpoints para criação, consulta, atualização e remoção de itens, seguindo o padrão CRUD (Create, Read, Update e Delete).
+
+Tecnologias utilizadas:
+
+* NestJS
+* TypeORM
+* PostgreSQL
+* JWT para autenticação
+* class-validator para validação de dados
+
+#### Passo 2 — Cadastro de Produtos
+
+O aplicativo mobile permite cadastrar novos produtos diretamente no banco de dados através da API.
+
+Os dados enviados incluem:
+
+* Nome do produto
+* Descrição
+* Categoria
+* Preço
+* URL da imagem
+
+Fluxo:
+
+1. Usuário acessa a tela de gerenciamento de produtos.
+2. Preenche o formulário de cadastro.
+3. O aplicativo envia uma requisição `POST /products`.
+4. A API valida os dados e salva o produto no PostgreSQL.
+5. O novo item passa a integrar o cardápio imediatamente.
+
+Exemplo:
+
+```http
+POST /products
+```
+
+```json
+{
+  "name": "Pizza Calabresa",
+  "description": "Pizza com calabresa e cebola",
+  "category": "Pizzas",
+  "price": 49.90,
+  "imageUrl": "https://..."
+}
+```
+
+#### Passo 3 — Consulta de Produtos
+
+A listagem do cardápio deixou de utilizar dados mockados e passou a consumir informações diretamente do banco de dados.
+
+Fluxo:
+
+1. Ao abrir a tela de Cardápio, o aplicativo realiza uma requisição `GET /products`.
+2. A API consulta o PostgreSQL.
+3. Os produtos retornados são exibidos dinamicamente através do componente `FlatList`.
+4. Novos produtos cadastrados aparecem automaticamente na listagem.
+
+Exemplo:
+
+```http
+GET /products
+```
+
+#### Operações CRUD Implementadas
+
+| Método | Endpoint        | Descrição                     |
+| ------ | --------------- | ----------------------------- |
+| GET    | `/products`     | Lista todos os produtos       |
+| GET    | `/products/:id` | Busca um produto específico   |
+| POST   | `/products`     | Cadastra um novo produto      |
+| PATCH  | `/products/:id` | Atualiza um produto existente |
+| DELETE | `/products/:id` | Remove um produto do cardápio |
+
+#### Benefícios da Implementação
+
+* Persistência real dos dados no PostgreSQL
+* Integração completa entre frontend e backend
+* Atualização dinâmica do cardápio
+* Estrutura preparada para expansão futura
+* Aplicação do padrão CRUD completo
+* Comunicação via API REST seguindo boas práticas de desenvolvimento
+
+### Passo Extra — Demonstração em Vídeo
+
+O vídeo demonstra:
+
+* Cadastro de usuário
+* Login e autenticação JWT
+* Navegação pelo Drawer
+* Cadastro de produtos no banco PostgreSQL
+* Consulta dos produtos via API REST
+* Exibição dinâmica do cardápio com FlatList
+* Visualização dos detalhes do produto
+* Compartilhamento nativo utilizando a API Share
+* Persistência dos dados entre reinicializações do aplicativo
+* Integração completa entre React Native, NestJS e PostgreSQL
