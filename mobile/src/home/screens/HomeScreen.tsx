@@ -8,12 +8,13 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AppStackParamList } from '../../types/navigation';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { DrawerActions } from '@react-navigation/native';
+import { AppDrawerParamList } from '../../types/navigation';
 import { useAuth } from '../../hooks/useAuth';
 
 type Props = {
-  navigation: NativeStackNavigationProp<AppStackParamList, 'Home'>;
+  navigation: DrawerNavigationProp<AppDrawerParamList, 'Home'>;
 };
 
 export default function HomeScreen({ navigation }: Props) {
@@ -41,7 +42,14 @@ export default function HomeScreen({ navigation }: Props) {
       <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
 
       <View style={styles.topBar}>
-        <View>
+        <TouchableOpacity
+          style={styles.menuButton}
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
+          <Text style={styles.menuIcon}>☰</Text>
+        </TouchableOpacity>
+        <View style={styles.greetingContainer}>
           <Text style={styles.greeting}>Olá, {user?.name ?? 'usuário'}! 👋</Text>
           <Text style={styles.subGreeting}>Bem-vindo ao Cardápio Digital</Text>
         </View>
@@ -53,14 +61,14 @@ export default function HomeScreen({ navigation }: Props) {
       <View style={styles.content}>
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate('Register')}
+          onPress={() => navigation.navigate('Cardapio')}
           activeOpacity={0.88}
         >
           <View style={styles.cardIconWrapper}>
-            <Text style={styles.cardIcon}>👤</Text>
+            <Text style={styles.cardIcon}>🍽️</Text>
           </View>
-          <Text style={styles.cardTitle}>Cadastrar Usuário</Text>
-          <Text style={styles.cardSubtitle}>Criar uma nova conta de acesso</Text>
+          <Text style={styles.cardTitle}>Ver Cardápio</Text>
+          <Text style={styles.cardSubtitle}>Explore nossos produtos e pratos</Text>
           <Text style={styles.cardArrow}>→</Text>
         </TouchableOpacity>
       </View>
@@ -78,8 +86,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#F3F4F6',
     shadowColor: '#000',
@@ -88,8 +96,22 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
+  menuButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  menuIcon: {
+    fontSize: 22,
+    color: '#1A1A1A',
+  },
+  greetingContainer: {
+    flex: 1,
+    alignItems: 'center',
+  },
   greeting: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '700',
     color: '#1A1A1A',
   },

@@ -3,7 +3,7 @@ import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuth } from '../hooks/useAuth';
 import AuthNavigator from '../auth/navigation/AuthNavigator';
-import AppNavigator from './AppNavigator';
+import AppDrawerNavigator from './AppDrawerNavigator';
 
 export default function RootNavigator() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -18,7 +18,7 @@ export default function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+      {isAuthenticated ? <AppDrawerNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 }
