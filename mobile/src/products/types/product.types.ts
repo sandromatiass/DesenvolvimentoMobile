@@ -4,5 +4,15 @@ export interface Product {
   description: string;
   price: number;
   category: string;
-  imageUrl: string;
+  imageUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateProductPayload {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  imageUrl?: string;
 }

@@ -23,4 +23,5 @@ export type AppDrawerParamList = {
 export type ProductStackParamList = {
   ProductList: undefined;
   ProductDetail: { product: Product };
+  CreateProduct: undefined;
 };

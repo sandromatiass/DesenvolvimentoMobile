@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ProductStackParamList } from '../types/navigation';
 import ProductListScreen from '../products/screens/ProductListScreen';
 import ProductDetailScreen from '../products/screens/ProductDetailScreen';
+import CreateProductScreen from '../products/screens/CreateProductScreen';
 
 const Stack = createNativeStackNavigator<ProductStackParamList>();
 
@@ -11,6 +12,7 @@ export default function ProductStackNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="ProductList" component={ProductListScreen} />
       <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
+      <Stack.Screen name="CreateProduct" component={CreateProductScreen} />
     </Stack.Navigator>
   );
 }

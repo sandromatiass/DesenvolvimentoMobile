@@ -40,7 +40,7 @@ export default function ProductDetailScreen({ navigation, route }: Props) {
     try {
       setSharing(true);
       await Share.share({
-        message: `Confira ${product.name} no Cardápio Digital! ${product.description} - R$ ${product.price.toFixed(2)}`,
+        message: `Confira ${product.name} no Cardápio Digital! ${product.description} - R$ ${Number(product.price).toFixed(2)}`,
         title: product.name,
       });
     } catch {
@@ -69,20 +69,38 @@ export default function ProductDetailScreen({ navigation, route }: Props) {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Image
-          source={{ uri: product.imageUrl }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        {product.imageUrl ? (
+          <Image
+            source={{ uri: product.imageUrl }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={[styles.image, styles.imagePlaceholder]}>
+            <Text style={styles.placeholderIcon}>🍽️</Text>
+          </View>
+        )}
 
         <View style={styles.content}>
-          <View style={[styles.badge, { backgroundColor: badgeColor + '20', borderColor: badgeColor + '40' }]}>
-            <Text style={[styles.badgeText, { color: badgeColor }]}>{product.category}</Text>
+          <View
+            style={[
+              styles.badge,
+              {
+                backgroundColor: badgeColor + '20',
+                borderColor: badgeColor + '40',
+              },
+            ]}
+          >
+            <Text style={[styles.badgeText, { color: badgeColor }]}>
+              {product.category}
+            </Text>
           </View>
 
           <Text style={styles.name}>{product.name}</Text>
 
-          <Text style={styles.price}>R$ {product.price.toFixed(2)}</Text>
+          <Text style={styles.price}>
+            R$ {Number(product.price).toFixed(2)}
+          </Text>
 
           <View style={styles.divider} />
 
@@ -148,6 +166,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 280,
     backgroundColor: '#F3F4F6',
+  },
+  imagePlaceholder: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  placeholderIcon: {
+    fontSize: 72,
   },
   content: {
     padding: 24,
